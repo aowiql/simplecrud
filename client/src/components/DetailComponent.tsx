@@ -1,7 +1,7 @@
 const DetailComponent = () => {
   return (
     <>
-      <h1>Detail</h1>
+      <h1>test</h1>
     </>
   );
 };
