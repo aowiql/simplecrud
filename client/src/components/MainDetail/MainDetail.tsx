@@ -91,7 +91,7 @@ const MainDetail = () => {
   const handleUpdateClick = () => {
     updatePostHandler.mutate(Number(id));
     setEditing(!editing);
-    navigate(`/maindetail/${Number(id)}`);
+    navigate("/");
   };
 
   return (
