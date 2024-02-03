@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "react-query";
 import { getPosts } from "../../api/getPosts";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { donePost } from "../../api/donePost";
+import "./PostComponent.css";
 
 interface Posts {
   id: number;
@@ -18,8 +19,6 @@ const PostComponent = () => {
   );
   console.log("data", posts);
   const navigate = useNavigate();
-
-  const { id } = useParams();
 
   const goDetailPage = (id: number, boardPost: string) => {
     navigate(`/maindetail/${id}`, { state: { boardPost } });
@@ -53,19 +52,22 @@ const PostComponent = () => {
       {posts?.map(
         (post) =>
           post.boardDone && (
-            <>
-              <div
-                key={post.id}
-                onClick={() =>
-                  detalPageNavhandler(post.id, post.id, post.boardPost)
-                }
+            <div
+              key={post.id}
+              className="post"
+              onClick={() =>
+                detalPageNavhandler(post.id, post.id, post.boardPost)
+              }
+            >
+              <div className="postTitle">{post.boardTitle}</div>
+              <div className="postBody">{post.boardPost}</div>
+              <button
+                className="postBtn"
+                onClick={() => handleOnClick(post.id, post.boardDone)}
               >
-                {post.boardTitle}
-              </div>
-              <button onClick={() => handleOnClick(post.id, post.boardDone)}>
                 보관함으로
               </button>
-            </>
+            </div>
           )
       )}
     </>

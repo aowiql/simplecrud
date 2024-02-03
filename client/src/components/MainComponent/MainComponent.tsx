@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import PostComponent from "../PostComponent/PostComponent";
+import "./MainComponent.css";
 
 const MainComponent = () => {
   const navigate = useNavigate();
@@ -14,8 +15,10 @@ const MainComponent = () => {
 
   return (
     <>
-      <div>
+      <div className="mainPost">
         <PostComponent />
+      </div>
+      <div className="mainPostBtn">
         <button onClick={goInputPage}>게시글 작성</button>
         <button onClick={goDonePage}>보관함</button>
       </div>

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { donePost } from "../../api/donePost";
+import "./MainDetail.css";
 
 const MainDetail = () => {
   const { id } = useParams();
@@ -38,12 +39,16 @@ const MainDetail = () => {
   };
 
   return (
-    <>
-      <h1>test {id}</h1>
-      <p>{boardPost}</p>
-      <button onClick={goBack}>뒤로</button>
-      <button onClick={doneHandler}>보관함으로</button>
-    </>
+    <div className="detail">
+      <div className="detailPost">
+        <h1>test {id}</h1>
+        <p>{boardPost}</p>
+      </div>
+      <div className="detailBtn">
+        <button onClick={goBack}>뒤로</button>
+        <button onClick={doneHandler}>보관함으로</button>
+      </div>
+    </div>
   );
 };
 
