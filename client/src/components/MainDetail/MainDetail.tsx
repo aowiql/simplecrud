@@ -1,4 +1,6 @@
+import { useMutation, useQueryClient } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { donePost } from "../../api/donePost";
 
 const MainDetail = () => {
   const { id } = useParams();
@@ -11,12 +13,36 @@ const MainDetail = () => {
     navigate(-1);
   };
 
+  const backUrl = "http://localhost:8080";
+
+  const queryClient = useQueryClient();
+
+  const boardDone = location.state?.boardDone;
+
+  const doneMutation = useMutation(
+    (postId: number) => donePost(backUrl, postId, boardDone),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("posts");
+        navigate("/");
+      },
+    }
+  );
+
+  const doneHandler = async () => {
+    try {
+      await doneMutation.mutateAsync(Number(id));
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
   return (
     <>
       <h1>test {id}</h1>
       <p>{boardPost}</p>
       <button onClick={goBack}>뒤로</button>
-      <button>보관함으로</button>
+      <button onClick={doneHandler}>보관함으로</button>
     </>
   );
 };
