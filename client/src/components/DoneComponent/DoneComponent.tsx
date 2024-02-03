@@ -8,7 +8,7 @@ interface Posts {
   boardDone: boolean;
 }
 
-const PostComponent = () => {
+const DoneComponent = () => {
   const backUrl = "http://localhost:8080";
 
   const { data: posts } = useQuery<Posts[]>("posts", () => getPosts(backUrl));
@@ -17,9 +17,9 @@ const PostComponent = () => {
     <>
       {posts?.map(
         (post) =>
-          post.boardDone && (
+          !post.boardDone && (
             <>
-              <div>{post.boardTitle}</div>
+              <div>{post.boardPost}</div>
             </>
           )
       )}
@@ -27,4 +27,4 @@ const PostComponent = () => {
   );
 };
 
-export default PostComponent;
+export default DoneComponent;
