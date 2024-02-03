@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import DoneComponent from "./DoneComponent/DoneComponent";
+import DoneComponent from "../DoneComponent/DoneComponent";
 
 const DoneMainComponent = () => {
   const navigate = useNavigate();

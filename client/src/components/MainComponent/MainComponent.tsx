@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import PostComponent from "./PostComponent/PostComponent";
+import PostComponent from "../PostComponent/PostComponent";
 
 const MainComponent = () => {
   const navigate = useNavigate();

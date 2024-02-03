@@ -1,4 +1,4 @@
-import DoneMainComponent from "../components/DoneMainComponent";
+import DoneMainComponent from "../components/DoneMain/DoneMainComponent";
 
 const Donepage = () => {
   return (
