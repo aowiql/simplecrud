@@ -52,5 +52,17 @@ public class BoardRestController {
         return checkPost;
     }
 
+    // 삭제
+    @DeleteMapping("/delete/{postId}")
+    public String deletePost(@PathVariable int postId) {
+        Board board = boardService.findById(postId);
 
+        if(board == null) {
+            throw new RuntimeException("Post lists not found - " + postId);
+        }
+
+        boardService.deletePost(postId);
+
+        return "Delete post id - " + postId;
+    }
 }
