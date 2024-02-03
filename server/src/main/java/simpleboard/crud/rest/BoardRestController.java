@@ -41,4 +41,16 @@ public class BoardRestController {
 
         return updated;
     }
+
+    // 체크리스트 수정
+    @PutMapping("/check/{postId}")
+    public Board donePost(@PathVariable Long postId, @RequestBody Board thePost) {
+        thePost.setBoardDone(!thePost.isBoardDone());
+
+        Board checkPost = boardService.donePost(postId, thePost);
+
+        return checkPost;
+    }
+
+
 }
