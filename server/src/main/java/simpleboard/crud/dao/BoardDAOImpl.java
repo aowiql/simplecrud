@@ -53,7 +53,8 @@ public class BoardDAOImpl implements BoardDAO {
         Board updateBoard = entityManager.find(Board.class, theId);
 
         if(updateBoard != null) {
-            updateBoard.setBoardPost(thePost.getBoardPost());
+            updateBoard.setBoardTitle(thePost.getBoardTitle()); // 제목 수정
+            updateBoard.setBoardPost(thePost.getBoardPost());   // 본문 수정
 
             entityManager.merge(updateBoard);
         }

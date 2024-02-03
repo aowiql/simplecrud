@@ -33,4 +33,12 @@ public class BoardRestController {
 
         return addPosts;
     }
+
+    // 게시글 수정
+    @PutMapping("/change/{postId}")
+    public Board updatedPost(@PathVariable Long postId, @RequestBody Board thePost) {
+        Board updated = boardService.updatePost(postId, thePost);
+
+        return updated;
+    }
 }
