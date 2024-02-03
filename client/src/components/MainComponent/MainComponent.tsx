@@ -17,7 +17,7 @@ const MainComponent = () => {
       <div>
         <PostComponent />
         <button onClick={goInputPage}>게시글 작성</button>
-        <button onClick={goDonePage}>삭제된 게시글</button>
+        <button onClick={goDonePage}>보관함</button>
       </div>
     </>
   );
