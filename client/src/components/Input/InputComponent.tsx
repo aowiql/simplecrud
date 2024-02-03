@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import "./InputComponent.css";
 import { useMutation, useQueryClient } from "react-query";
 import React, { useState } from "react";
 import { addPostBackend } from "../../api/addPost";
+
+import { InputPageDiv, InputTitle, PostInput, InputBtn } from "./InputStyle";
 
 const InputComponent = () => {
   const navigate = useNavigate();
@@ -50,28 +51,29 @@ const InputComponent = () => {
   };
 
   return (
-    <div className="inputPage">
-      <div className="titleInput">
+    <InputPageDiv>
+      <InputTitle>
         <input
           type="text"
           value={inputTitle}
           onChange={titleHaandler}
           placeholder="제목"
         />
-      </div>
-      <div className="postInput">
+      </InputTitle>
+      <PostInput>
         <textarea
           value={inputPost}
           placeholder="본문"
           onChange={postHandler}
           className="boardPost"
         />
-      </div>
-      <div className="inputBtn">
+      </PostInput>
+
+      <InputBtn className="inputBtn">
         <button onClick={goBack}>이전</button>
         <button onClick={inputHandler}>입력</button>
-      </div>
-    </div>
+      </InputBtn>
+    </InputPageDiv>
   );
 };
 

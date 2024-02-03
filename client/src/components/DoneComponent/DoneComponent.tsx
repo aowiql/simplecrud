@@ -2,7 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getPosts } from "../../api/getPosts";
 import { useNavigate } from "react-router-dom";
 import { deleteBackend } from "../../api/deletePost";
-import "./DoneComponent.css";
+import { donePost } from "../../api/donePost";
+import React from "react";
+import { PostDiv, PostTitle, PostBody, PostBtn } from "./DoneComponentStyle";
 
 interface Posts {
   id: number;
@@ -25,7 +27,9 @@ const DoneComponent = () => {
     }
   );
 
-  const { data: posts } = useQuery<Posts[]>("posts", () => getPosts(backUrl));
+  const { data: posts, refetch } = useQuery<Posts[]>("posts", () =>
+    getPosts(backUrl)
+  );
 
   const navigate = useNavigate();
 
@@ -47,28 +51,61 @@ const DoneComponent = () => {
     }
   };
 
+  const doneMutation = useMutation(
+    ({ postId, boardDone }: { postId: number; boardDone: boolean }) =>
+      donePost(backUrl, postId, boardDone),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
+
+  const handleOnClick = async (postId: number, boardDone: boolean) => {
+    try {
+      navigate("/donepage");
+      await doneMutation.mutateAsync({ postId, boardDone: !boardDone });
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
   return (
     <>
       {posts?.map(
         (post) =>
           !post.boardDone && (
             <>
-              <div
-                key={post.id}
-                className="post"
-                onClick={() =>
-                  detailPageNavHandler(post.id, post.id, post.boardPost)
-                }
-              >
-                <div className="postTitle">{post.boardTitle}</div>
-                <div className="postBody">{post.boardPost}</div>
-                <button
+              <PostDiv key={post.id}>
+                <PostTitle
+                  className="postTitle"
+                  onClick={() =>
+                    detailPageNavHandler(post.id, post.id, post.boardPost)
+                  }
+                >
+                  {post.boardTitle}
+                </PostTitle>
+                <PostBody
+                  className="postBody"
+                  onClick={() =>
+                    detailPageNavHandler(post.id, post.id, post.boardPost)
+                  }
+                >
+                  {post.boardPost}
+                </PostBody>
+                <PostBtn
                   className="postBtn"
                   onClick={() => deleteHandler(post.id)}
                 >
                   삭제
-                </button>
-              </div>
+                </PostBtn>
+                <PostBtn
+                  className="postBtn"
+                  onClick={() => handleOnClick(post.id, post.boardDone)}
+                >
+                  복구
+                </PostBtn>
+              </PostDiv>
             </>
           )
       )}

@@ -1,19 +1,21 @@
-.mainPost {
+import styled from "styled-components";
+
+const MainPosts = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 40px;
   justify-content: center;
   padding: 20px;
-}
+`;
 
-.mainPostBtn {
+const MainPostsBtnDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
+`;
 
-.mainPostBtn > button {
+const MainPostBtn = styled.button`
   border: none;
   background-color: #e10b7b;
   border-radius: 10px;
@@ -22,10 +24,11 @@
   color: white;
   font-size: 25px;
   transition: transform 0.2s ease;
-
   margin: 50px 40px 50px 0;
-}
 
-.mainPostBtn > button:hover {
-  transform: scale(1.1);
-}
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+export { MainPostBtn, MainPosts, MainPostsBtnDiv };

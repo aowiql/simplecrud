@@ -2,12 +2,21 @@ import { useMutation, useQueryClient } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { deleteBackend } from "../../api/deletePost";
 
-import "./DoneDetail.css";
+import {
+  DetailDiv,
+  DetailedPostDiv,
+  DetailedP,
+  DetailedH1,
+  DetailBtn,
+} from "./DoneDetailStyle";
+import { donePost } from "../../api/donePost";
 
 const DoneDetail = () => {
   const { id } = useParams();
   const location = useLocation();
   const boardPost = location.state?.boardPost || "";
+
+  const boardDone = location.state?.boardDone;
 
   const navigate = useNavigate();
 
@@ -37,17 +46,37 @@ const DoneDetail = () => {
     }
   };
 
+  const doneMutation = useMutation(
+    "posts",
+    (postId: number) => donePost(backUrl, postId, boardDone),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("posts");
+        navigate(-1);
+      },
+    }
+  );
+
+  const doneHandler = async () => {
+    try {
+      await doneMutation.mutateAsync(Number(id));
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
   return (
-    <div className="detail">
-      <div className="detailPost">
-        <h1>{id}</h1>
-        <p>{boardPost}</p>
+    <DetailDiv>
+      <DetailedPostDiv>
+        <DetailedH1>{id}</DetailedH1>
+        <DetailedP>{boardPost}</DetailedP>
+      </DetailedPostDiv>
+      <div>
+        <DetailBtn onClick={() => deleteHandler(Number(id))}>삭제</DetailBtn>
+        <DetailBtn onClick={() => doneHandler()}>복구</DetailBtn>
+        <DetailBtn onClick={goDonePage}>뒤로가기</DetailBtn>
       </div>
-      <div className="detailBtn">
-        <button onClick={() => deleteHandler(Number(id))}>삭제</button>
-        <button onClick={goDonePage}>뒤로가기</button>
-      </div>
-    </div>
+    </DetailDiv>
   );
 };
 

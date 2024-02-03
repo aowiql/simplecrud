@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DoneComponent from "../DoneComponent/DoneComponent";
-import "./DoneMainComponent.css";
+import { DoneMain, DoneMainDiv } from "./DoneMainStyle";
 
 const DoneMainComponent = () => {
   const navigate = useNavigate();
@@ -10,12 +10,12 @@ const DoneMainComponent = () => {
   };
 
   return (
-    <div className="doneMain">
-      <div className="doneMainDiv">
+    <DoneMain>
+      <DoneMainDiv>
         <DoneComponent />
-      </div>
+      </DoneMainDiv>
       <button onClick={goMainPage}>메인으로</button>
-    </div>
+    </DoneMain>
   );
 };
 

@@ -1,11 +1,11 @@
-import "./Title.css";
+import { TitleDiv, TitleHeader } from "./TitleStyle";
 
 const Title = () => {
   return (
     <>
-      <div className="title">
-        <h1>Simple Board</h1>
-      </div>
+      <TitleDiv>
+        <TitleHeader>Simple Board</TitleHeader>
+      </TitleDiv>
     </>
   );
 };
