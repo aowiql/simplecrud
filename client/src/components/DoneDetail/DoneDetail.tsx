@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { deleteBackend } from "../../api/deletePost";
 
+import "./DoneDetail.css";
+
 const DoneDetail = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -36,12 +38,16 @@ const DoneDetail = () => {
   };
 
   return (
-    <>
-      <h1>test {id}</h1>
-      <p>{boardPost}</p>
-      <button onClick={() => deleteHandler(Number(id))}>삭제</button>
-      <button onClick={goDonePage}>뒤로가기</button>
-    </>
+    <div className="detail">
+      <div className="detailPost">
+        <h1>{id}</h1>
+        <p>{boardPost}</p>
+      </div>
+      <div className="detailBtn">
+        <button onClick={() => deleteHandler(Number(id))}>삭제</button>
+        <button onClick={goDonePage}>뒤로가기</button>
+      </div>
+    </div>
   );
 };
 

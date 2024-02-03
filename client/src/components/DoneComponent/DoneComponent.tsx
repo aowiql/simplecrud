@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getPosts } from "../../api/getPosts";
 import { useNavigate } from "react-router-dom";
 import { deleteBackend } from "../../api/deletePost";
+import "./DoneComponent.css";
 
 interface Posts {
   id: number;
@@ -54,13 +55,20 @@ const DoneComponent = () => {
             <>
               <div
                 key={post.id}
+                className="post"
                 onClick={() =>
                   detailPageNavHandler(post.id, post.id, post.boardPost)
                 }
               >
-                {post.boardTitle}
+                <div className="postTitle">{post.boardTitle}</div>
+                <div className="postBody">{post.boardPost}</div>
+                <button
+                  className="postBtn"
+                  onClick={() => deleteHandler(post.id)}
+                >
+                  삭제
+                </button>
               </div>
-              <button onClick={() => deleteHandler(post.id)}>삭제</button>
             </>
           )
       )}
