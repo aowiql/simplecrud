@@ -26,13 +26,18 @@ const PostComponent = () => {
 
   const navigate = useNavigate();
 
-  const goDetailPage = (id: number, boardPost: string) => {
-    navigate(`/maindetail/${id}`, { state: { boardPost } });
+  const goDetailPage = (id: number, boardPost: string, boardTitle: string) => {
+    navigate(`/maindetail/${id}`, { state: { boardPost, boardTitle } });
   };
 
-  const detalPageNavhandler = (id: number, key: number, boardPost: string) => {
+  const detalPageNavhandler = (
+    id: number,
+    key: number,
+    boardTitle: string,
+    boardPost: string
+  ) => {
     if (id === key) {
-      goDetailPage(id, boardPost);
+      goDetailPage(id, boardPost, boardTitle);
     }
   };
 
@@ -61,14 +66,24 @@ const PostComponent = () => {
             <PostComponentDiv key={post.id}>
               <PostComponentTitles
                 onClick={() =>
-                  detalPageNavhandler(post.id, post.id, post.boardPost)
+                  detalPageNavhandler(
+                    post.id,
+                    post.id,
+                    post.boardTitle,
+                    post.boardPost
+                  )
                 }
               >
                 {post.boardTitle}
               </PostComponentTitles>
               <PostComponentBody
                 onClick={() =>
-                  detalPageNavhandler(post.id, post.id, post.boardPost)
+                  detalPageNavhandler(
+                    post.id,
+                    post.id,
+                    post.boardTitle,
+                    post.boardPost
+                  )
                 }
               >
                 {post.boardPost}
